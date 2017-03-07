@@ -1,15 +1,20 @@
 window.org_vaadin_addon_codemirror_CodeMirrorField = function() {
 	var e = this.getElement();
 	var connector = this;
-	var cm = new CodeMirror(
-			e,
-			{
-				value : this.getState().value,
-				mode : this.getState().mode
-			});
-	
+	var config = {
+		value : this.getState().value,
+		mode : this.getState().mode
+	};
+	var cm = new CodeMirror(e, config);
+	this.valuePropagationTimeout = null;
+
 	cm.on("changes", function() {
-		connector.onValueChange(cm.getValue());
+		if (connector.valuePropagationTimeout != null) {
+			window.clearTimeout(connector.valuePropagationTimeout);
+		}
+		connector.valuePropagationTimeout = window.setTimeout(function() {
+			connector.onValueChange(cm.getValue());
+		}, 100);
 	});
 
 	this.onStateChange = function() {
