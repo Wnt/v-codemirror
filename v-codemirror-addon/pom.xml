@@ -173,6 +173,11 @@
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
+
+            <resource>
+                <directory>src/main/webapp/VAADIN</directory>
+                <targetPath>VAADIN</targetPath>
+            </resource>
 		</resources>
 
 	</build>
