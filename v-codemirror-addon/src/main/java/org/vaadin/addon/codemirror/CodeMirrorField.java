@@ -7,6 +7,7 @@ import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.data.HasValue;
 import com.vaadin.shared.Registration;
+import com.vaadin.shared.ui.JavaScriptComponentState;
 import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.HasValueChangeMode;
@@ -74,8 +75,8 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 
 	protected void setValue(String value, boolean userOriginated) {
 		String oldValue = getState().value;
-		getState().value = value;
 		if (oldValue != value) {
+			getState(!userOriginated).value = value;
 			for (ValueChangeListener<String> l : valueChangeListeners) {
 				l.valueChange(new ValueChangeEvent<String>(this, oldValue, userOriginated));
 			}
@@ -120,5 +121,10 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 	@Override
 	protected CodeMirrorState getState() {
 		return (CodeMirrorState) super.getState();
+	}
+	@Override
+	protected CodeMirrorState getState(boolean markAsDirty) {
+		// TODO Auto-generated method stub
+		return (CodeMirrorState) super.getState(markAsDirty);
 	}
 }
