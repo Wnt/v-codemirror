@@ -2,6 +2,7 @@ package org.vaadin.addon.codemirror;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
@@ -13,35 +14,36 @@ import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.HasValueChangeMode;
 
 @JavaScript({
-	// main library
-	"vaadin://codemirror/codemirror.js", 
-	// Vaadin connector
-	"vaadin://codemirror/codemirror-connector.js",
-	// language support
-	"vaadin://codemirror/mode/clike/clike.js",
-	// language support
-	"vaadin://codemirror/mode/javascript/javascript.js",
-	// language support
-	"vaadin://codemirror/mode/xml/xml.js",
-	// language support
-	"vaadin://codemirror/mode/markdown/markdown.js",
-	// language support
-	"vaadin://codemirror/mode/css/css.js",
-	})
-@StyleSheet({"vaadin://codemirror/codemirror.css"})
+		// main library
+		"vaadin://codemirror/codemirror.js",
+		// Vaadin connector
+		"vaadin://codemirror/codemirror-connector.js",
+		// language support
+		"vaadin://codemirror/mode/clike/clike.js",
+		// language support
+		"vaadin://codemirror/mode/javascript/javascript.js",
+		// language support
+		"vaadin://codemirror/mode/xml/xml.js",
+		// language support
+		"vaadin://codemirror/mode/markdown/markdown.js",
+		// language support
+		"vaadin://codemirror/mode/css/css.js", })
+@StyleSheet({ "vaadin://codemirror/codemirror.css" })
 public class CodeMirrorField extends AbstractJavaScriptComponent implements HasValue<String>, HasValueChangeMode {
 	private List<ValueChangeListener<String>> valueChangeListeners = new ArrayList<>();
-	
+	private String value;
+
 	public CodeMirrorField() {
 		getState().mode = "text/x-java";
-		
+
 		addFunction("onValueChange", arguments -> {
 			String value = arguments.asString();
 			setValue(value, true);
 		});
-		
+
 		setValueChangeMode(ValueChangeMode.EAGER);
 	}
+
 	public void setMode(String mode) {
 		getState().mode = mode;
 	}
@@ -74,9 +76,12 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 	}
 
 	protected void setValue(String value, boolean userOriginated) {
-		String oldValue = getState().value;
-		if (oldValue != value) {
-			getState(!userOriginated).value = value;
+		String oldValue = this.value;
+		this.value = value;
+		if (!Objects.equals(oldValue, value)) {
+			if (!userOriginated) {
+				getState().value = value;
+			}
 			for (ValueChangeListener<String> l : valueChangeListeners) {
 				l.valueChange(new ValueChangeEvent<String>(this, oldValue, userOriginated));
 			}
@@ -85,7 +90,7 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 
 	@Override
 	public String getValue() {
-		return getState().value;
+		return value;
 	}
 
 	@Override
@@ -122,6 +127,7 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 	protected CodeMirrorState getState() {
 		return (CodeMirrorState) super.getState();
 	}
+
 	@Override
 	protected CodeMirrorState getState(boolean markAsDirty) {
 		// TODO Auto-generated method stub
