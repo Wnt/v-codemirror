@@ -22,7 +22,7 @@ window.org_vaadin_addon_codemirror_CodeMirrorField = function() {
 		if (connector.internalValueChange) {
 			return;
 		}
-		connector.value = cm.getValue();
+		connector.value = connector.cm.getValue();
 		if (connector.valuePropagationTimeout != null) {
 			window.clearTimeout(connector.valuePropagationTimeout);
 			connector.valuePropagationTimeout = null;
@@ -42,7 +42,7 @@ window.org_vaadin_addon_codemirror_CodeMirrorField = function() {
 		var oldValue = connector.value;
 		if (oldValue != state.value) {
 			connector.internalValueChange = true;
-			cm.setValue(state.value);
+			connector.cm.setValue(state.value);
 			connector.internalValueChange = false;
 		}
 
