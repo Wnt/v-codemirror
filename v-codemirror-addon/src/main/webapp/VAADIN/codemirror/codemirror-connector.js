@@ -2,17 +2,23 @@ window.org_vaadin_addon_codemirror_CodeMirrorField = function() {
 	var e = this.getElement();
 	var connector = this;
 	var config = {
-		value: this.getState().value,
-		mode: this.getState().mode,
-		indentUnit: this.getState().indentUnit
+		value : this.getState().value,
+		mode : this.getState().mode,
+		indentUnit : this.getState().indentUnit
 	};
 	var value = this.getState().value;
 	var internalValueChange = false;
 	;
-	var cm = new CodeMirror(e, config);
+	this.cm = new CodeMirror(e, config);
 	this.valuePropagationTimeout = null;
+	this.sizeCheckTimeout = null;
 
-	cm.on("changes", function() {
+	// workaround to react to the new size after Vaadin's layouting phase
+	sizeCheckTimeout = window.setTimeout(function() {
+		connector.checkSize();
+	}, 200);
+
+	this.cm.on("changes", function() {
 		if (connector.internalValueChange) {
 			return;
 		}
@@ -26,6 +32,11 @@ window.org_vaadin_addon_codemirror_CodeMirrorField = function() {
 		}, 200);
 	});
 
+	this.checkSize = function () {
+		if (connector.cm.display.lastWrapHeight != connector.cm.display.wrapper.clientHeight) {
+			connector.cm.refresh();
+		}
+	};
 	this.onStateChange = function() {
 		var state = this.getState();
 		var oldValue = connector.value;
