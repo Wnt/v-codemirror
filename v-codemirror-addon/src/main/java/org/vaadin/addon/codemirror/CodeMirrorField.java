@@ -35,6 +35,7 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 
 	public CodeMirrorField() {
 		getState().mode = "text/x-java";
+		getState().indentUnit = 2;
 
 		addFunction("onValueChange", arguments -> {
 			String value = arguments.asString();
@@ -46,6 +47,10 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 
 	public void setMode(String mode) {
 		getState().mode = mode;
+	}
+
+	public void setIndentUnit(int indentUnit) {
+		getState().indentUnit = indentUnit;
 	}
 
 	@Override

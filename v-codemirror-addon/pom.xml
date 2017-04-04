@@ -5,7 +5,7 @@
 	<groupId>org.vaadin.addon</groupId>
 	<artifactId>v-codemirror</artifactId>
 	<packaging>jar</packaging>
-	<version>0.2</version>
+	<version>0.3</version>
 	<name>V-Codemirror</name>
 
 	<prerequisites>

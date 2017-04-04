@@ -2,8 +2,9 @@ window.org_vaadin_addon_codemirror_CodeMirrorField = function() {
 	var e = this.getElement();
 	var connector = this;
 	var config = {
-		value : this.getState().value,
-		mode : this.getState().mode
+		value: this.getState().value,
+		mode: this.getState().mode,
+		indentUnit: this.getState().indentUnit
 	};
 	var value = this.getState().value;
 	var internalValueChange = false;

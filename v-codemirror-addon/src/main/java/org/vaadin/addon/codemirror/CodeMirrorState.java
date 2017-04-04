@@ -9,5 +9,6 @@ public class CodeMirrorState extends JavaScriptComponentState {
 	public int valueChangeTimeout;
 	public String value;
 	public String mode;
+	public int indentUnit;
 
 }
