@@ -5,7 +5,7 @@
 	<groupId>org.vaadin.addon</groupId>
 	<artifactId>v-codemirror-demo</artifactId>
 	<packaging>war</packaging>
-	<version>0.5</version>
+	<version>0.7</version>
 	<name>MyComponent Add-on Demo</name>
 
 	<prerequisites>
@@ -21,24 +21,12 @@
 		<jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
 	</properties>
 
-    <!--
-	<organization>
-		<name>My Name</name>
-		<url>https://github.com/mygithubaccount/MyComponent/</url>
-	</organization>
-
-	<scm>
-		<url>git://github.com/mygithubaccount/MyComponent.git</url>
-		<connection>scm:git:git://github.com/mygithubaccount/MyComponent.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:/mygithubaccount/${componentClassName}.git</developerConnection>
-		<tag>MyComponent add-on for Vaadin</tag>
-	</scm>
-
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/mygithubaccount/MyComponent/issues</url>
-	</issueManagement>
-    -->
+	<!-- <organization> <name>My Name</name> <url>https://github.com/mygithubaccount/MyComponent/</url> 
+		</organization> <scm> <url>git://github.com/mygithubaccount/MyComponent.git</url> 
+		<connection>scm:git:git://github.com/mygithubaccount/MyComponent.git</connection> 
+		<developerConnection>scm:git:ssh://git@github.com:/mygithubaccount/${componentClassName}.git</developerConnection> 
+		<tag>MyComponent add-on for Vaadin</tag> </scm> <issueManagement> <system>GitHub</system> 
+		<url>https://github.com/mygithubaccount/MyComponent/issues</url> </issueManagement> -->
 
 	<licenses>
 		<license>
@@ -134,7 +122,10 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.plugin.version}</version>
 				<configuration>
-<!-- 					<scanIntervalSeconds>2</scanIntervalSeconds> -->
+					<httpConnector>
+						<port>8081</port>
+					</httpConnector>
+					<!-- <scanIntervalSeconds>2</scanIntervalSeconds> -->
 				</configuration>
 			</plugin>
 

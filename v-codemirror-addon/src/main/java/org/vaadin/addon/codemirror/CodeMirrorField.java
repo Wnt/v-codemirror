@@ -15,20 +15,20 @@ import com.vaadin.ui.HasValueChangeMode;
 
 @JavaScript({
 		// main library
-		"vaadin://codemirror/codemirror.js",
+		"vaadin://codemirror/codemirror.js?v=0.7",
 		// Vaadin connector
-		"vaadin://codemirror/codemirror-connector.js",
+		"vaadin://codemirror/codemirror-connector.js?v=0.7",
 		// language support
-		"vaadin://codemirror/mode/clike/clike.js",
+		"vaadin://codemirror/mode/clike/clike.js?v=0.7",
 		// language support
-		"vaadin://codemirror/mode/javascript/javascript.js",
+		"vaadin://codemirror/mode/javascript/javascript.js?v=0.7",
 		// language support
-		"vaadin://codemirror/mode/xml/xml.js",
+		"vaadin://codemirror/mode/xml/xml.js?v=0.7",
 		// language support
-		"vaadin://codemirror/mode/markdown/markdown.js",
+		"vaadin://codemirror/mode/markdown/markdown.js?v=0.7",
 		// language support
-		"vaadin://codemirror/mode/css/css.js", })
-@StyleSheet({ "vaadin://codemirror/codemirror.css" })
+		"vaadin://codemirror/mode/css/css.js?v=0.7", })
+@StyleSheet({ "vaadin://codemirror/codemirror.css?v=0.7" })
 public class CodeMirrorField extends AbstractJavaScriptComponent implements HasValue<String>, HasValueChangeMode {
 	private List<ValueChangeListener<String>> valueChangeListeners = new ArrayList<>();
 	private String value;
@@ -84,9 +84,7 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 		String oldValue = this.value;
 		this.value = value;
 		if (!Objects.equals(oldValue, value)) {
-			if (!userOriginated) {
-				getState().value = value;
-			}
+			getState().value = value;
 			for (ValueChangeListener<String> l : valueChangeListeners) {
 				l.valueChange(new ValueChangeEvent<String>(this, oldValue, userOriginated));
 			}

@@ -10,6 +10,8 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -27,20 +29,16 @@ public class DemoUI extends UI
     @Override
     protected void init(VaadinRequest request) {
 
-        // Initialize our new UI component
-        final CodeMirrorField cmField = new CodeMirrorField();
-        cmField.setValue("@Widgetset(\"com.vaadin.v7.Vaadin7WidgetSet\")\npublic class FiddleUi extends UI {\n\n	final private static DockerService dockerService = new DockerService();\n	\n	@Override\n	protected void init(VaadinRequest vaadinRequest) {");
-
-        // Show it in the middle of the screen
-        final VerticalLayout layout = new VerticalLayout();
-        layout.setStyleName("demoContentLayout");
-        layout.setSizeFull();
-        layout.setMargin(false);
-        layout.setSpacing(false);
-        layout.addComponent(cmField);
-        layout.setComponentAlignment(cmField, Alignment.MIDDLE_CENTER);
-        cmField.setSizeFull();
-        layout.setExpandRatio(cmField, 1);
-        setContent(layout);
+        TabSheet tabSheet = new TabSheet(createCMField(),createCMField());
+        tabSheet.setSizeFull();
+        setContent(tabSheet);
     }
+
+	private CodeMirrorField createCMField() {
+		CodeMirrorField cmField = new CodeMirrorField();
+        cmField.setValue("@Widgetset(\"com.vaadin.v7.Vaadin7WidgetSet\")\npublic class FiddleUi extends UI {\n\n	final private static DockerService dockerService = new DockerService();\n	\n	@Override\n	protected void init(VaadinRequest vaadinRequest) {");
+        cmField.setSizeFull();
+        cmField.setCaption("foobar");
+		return cmField;
+	}
 }
