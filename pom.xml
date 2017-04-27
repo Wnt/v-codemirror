@@ -5,7 +5,7 @@
 	<groupId>org.vaadin.addon</groupId>
 	<artifactId>v-codemirror-root</artifactId>
 	<packaging>pom</packaging>
-	<version>0.7</version>
+	<version>0.8</version>
 	<name>MyComponent Add-on Root Project</name>
 
 	<prerequisites>

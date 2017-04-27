@@ -15,20 +15,20 @@ import com.vaadin.ui.HasValueChangeMode;
 
 @JavaScript({
 		// main library
-		"vaadin://codemirror/codemirror.js?v=0.7",
+		"vaadin://codemirror/codemirror.js?v=0.8",
 		// Vaadin connector
-		"vaadin://codemirror/codemirror-connector.js?v=0.7",
+		"vaadin://codemirror/codemirror-connector.js?v=0.8",
 		// language support
-		"vaadin://codemirror/mode/clike/clike.js?v=0.7",
+		"vaadin://codemirror/mode/clike/clike.js?v=0.8",
 		// language support
-		"vaadin://codemirror/mode/javascript/javascript.js?v=0.7",
+		"vaadin://codemirror/mode/javascript/javascript.js?v=0.8",
 		// language support
-		"vaadin://codemirror/mode/xml/xml.js?v=0.7",
+		"vaadin://codemirror/mode/xml/xml.js?v=0.8",
 		// language support
-		"vaadin://codemirror/mode/markdown/markdown.js?v=0.7",
+		"vaadin://codemirror/mode/markdown/markdown.js?v=0.8",
 		// language support
-		"vaadin://codemirror/mode/css/css.js?v=0.7", })
-@StyleSheet({ "vaadin://codemirror/codemirror.css?v=0.7" })
+		"vaadin://codemirror/mode/css/css.js?v=0.8", })
+@StyleSheet({ "vaadin://codemirror/codemirror.css?v=0.8" })
 public class CodeMirrorField extends AbstractJavaScriptComponent implements HasValue<String>, HasValueChangeMode {
 	private List<ValueChangeListener<String>> valueChangeListeners = new ArrayList<>();
 	private String value;

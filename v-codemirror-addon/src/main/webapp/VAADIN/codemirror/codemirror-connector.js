@@ -6,9 +6,10 @@ window.org_vaadin_addon_codemirror_CodeMirrorField = function() {
 		mode : this.getState().mode,
 		indentUnit : this.getState().indentUnit
 	};
-	var value = this.getState().value;
-	var internalValueChange = false;
-	;
+	// previous synced value
+	this.value = this.getState().value;
+	this.internalValueChange = false;
+	
 	this.cm = new CodeMirror(e, config);
 	this.valuePropagationTimeout = null;
 	this.sizeCheckTimeout = null;
@@ -22,12 +23,12 @@ window.org_vaadin_addon_codemirror_CodeMirrorField = function() {
 		if (connector.internalValueChange) {
 			return;
 		}
-		connector.value = connector.cm.getValue();
 		if (connector.valuePropagationTimeout != null) {
 			window.clearTimeout(connector.valuePropagationTimeout);
 			connector.valuePropagationTimeout = null;
 		}
 		connector.valuePropagationTimeout = window.setTimeout(function() {
+			connector.value = connector.cm.getValue();
 			connector.onValueChange(connector.value);
 		}, 200);
 	});
