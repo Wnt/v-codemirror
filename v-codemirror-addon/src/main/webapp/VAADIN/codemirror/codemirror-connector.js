@@ -22,6 +22,17 @@ window.org_vaadin_addon_codemirror_CodeMirrorField = function() {
 	sizeCheckTimeout = window.setTimeout(function() {
 		connector.checkSize();
 	}, 200);
+	
+	this.autoFoldImports = function () {
+		for (var i = 0; i < connector.cm.lastLine(); ++i) {
+			if (connector.cm.getLine(i).trim().lastIndexOf("import", 0) === 0) {
+			    connector.cm.foldCode(CodeMirror.Pos(i, 0));
+				break;
+			}
+		}
+	}
+	
+	if (config.mode === "text/x-java") connector.autoFoldImports();
 
 	this.cm.on("changes", function() {
 		if (connector.internalValueChange) {
