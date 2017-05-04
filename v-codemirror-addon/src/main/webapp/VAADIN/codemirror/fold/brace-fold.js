@@ -76,7 +76,14 @@ CodeMirror.registerHelper("fold", "import", function(cm, start) {
   if (!has || hasImport(startLine - 1) || ((prev = hasImport(startLine - 2)) && prev.end.line == startLine - 1))
     return null;
   for (var end = has.end;;) {
-    var next = hasImport(end.line + 1);
+    var nextLine = cm.getLine(end.line + 1);
+    var i = 1;
+    while (nextLine.trim() === "") {
+      nextLine = cm.getLine(end.line + i);
+      i++;
+    }
+    var nextToCheck = cm.getLine(end.line + i);
+    var next = hasImport(end.line + i);
     if (next == null) break;
     end = next.end;
   }
