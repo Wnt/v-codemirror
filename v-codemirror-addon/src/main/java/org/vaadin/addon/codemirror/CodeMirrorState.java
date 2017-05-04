@@ -10,5 +10,8 @@ public class CodeMirrorState extends JavaScriptComponentState {
 	public String value;
 	public String mode;
 	public int indentUnit;
-
+	public boolean lineNumbers;
+	public boolean lineWrapping;
+	public boolean foldGutter;
+	public String[] gutters;
 }

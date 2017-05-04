@@ -1,6 +1,7 @@
 package org.vaadin.addon.codemirror;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,20 +16,32 @@ import com.vaadin.ui.HasValueChangeMode;
 
 @JavaScript({
 		// main library
-		"vaadin://codemirror/codemirror.js?v=0.8",
+		"vaadin://codemirror/codemirror.js?v=0.9",
 		// Vaadin connector
-		"vaadin://codemirror/codemirror-connector.js?v=0.8",
+		"vaadin://codemirror/codemirror-connector.js?v=0.9",
 		// language support
-		"vaadin://codemirror/mode/clike/clike.js?v=0.8",
+		"vaadin://codemirror/mode/clike/clike.js?v=0.9",
 		// language support
-		"vaadin://codemirror/mode/javascript/javascript.js?v=0.8",
+		"vaadin://codemirror/mode/javascript/javascript.js?v=0.9",
 		// language support
-		"vaadin://codemirror/mode/xml/xml.js?v=0.8",
+		"vaadin://codemirror/mode/xml/xml.js?v=0.9",
 		// language support
-		"vaadin://codemirror/mode/markdown/markdown.js?v=0.8",
+		"vaadin://codemirror/mode/markdown/markdown.js?v=0.9",
 		// language support
-		"vaadin://codemirror/mode/css/css.js?v=0.8", })
-@StyleSheet({ "vaadin://codemirror/codemirror.css?v=0.8" })
+		"vaadin://codemirror/mode/css/css.js?v=0.9",
+		// code folding
+		"vaadin://codemirror/fold/foldcode.js?v=0.9",
+		// code folding
+		"vaadin://codemirror/fold/comment-fold.js?v=0.9",
+		// code folding
+		"vaadin://codemirror/fold/brace-fold.js?v=0.9",
+		// code folding
+		"vaadin://codemirror/fold/foldgutter.js?v=0.9", })
+@StyleSheet({
+		// main styles
+		"vaadin://codemirror/codemirror.css?v=0.9",
+		// code folding
+		"vaadin://codemirror/fold/foldgutter.css?v=0.9", })
 public class CodeMirrorField extends AbstractJavaScriptComponent implements HasValue<String>, HasValueChangeMode {
 	private List<ValueChangeListener<String>> valueChangeListeners = new ArrayList<>();
 	private String value;
@@ -36,6 +49,11 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 	public CodeMirrorField() {
 		getState().mode = "text/x-java";
 		getState().indentUnit = 2;
+		getState().lineNumbers = true;
+		getState().lineWrapping = true;
+		getState().foldGutter = true;
+		
+//		setGutters("CodeMirror-linenumbers", "CodeMirror-foldgutter");
 
 		addFunction("onValueChange", arguments -> {
 			String value = arguments.asString();
@@ -44,6 +62,13 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 
 		setValueChangeMode(ValueChangeMode.EAGER);
 	}
+
+//	private void setGutters(String... gutters) {
+//		for (String string : gutters) {
+//			
+//		}
+//		getState().foldGutter = 
+//	}
 
 	public void setMode(String mode) {
 		getState().mode = mode;

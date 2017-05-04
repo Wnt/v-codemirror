@@ -4,7 +4,11 @@ window.org_vaadin_addon_codemirror_CodeMirrorField = function() {
 	var config = {
 		value : this.getState().value,
 		mode : this.getState().mode,
-		indentUnit : this.getState().indentUnit
+		indentUnit : this.getState().indentUnit,
+	    lineNumbers: this.getState().lineNumbers,
+	    lineWrapping: this.getState().lineWrapping,
+	    foldGutter: this.getState().foldGutter,
+	    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
 	};
 	// previous synced value
 	this.value = this.getState().value;
