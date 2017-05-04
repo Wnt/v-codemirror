@@ -1,5 +1,7 @@
 package org.vaadin.addon.codemirror;
 
+import java.util.List;
+
 import com.vaadin.shared.ui.JavaScriptComponentState;
 import com.vaadin.shared.ui.ValueChangeMode;
 
@@ -13,5 +15,6 @@ public class CodeMirrorState extends JavaScriptComponentState {
 	public boolean lineNumbers;
 	public boolean lineWrapping;
 	public boolean foldGutter;
-	public String[] gutters;
+	public List<String> gutters;
+
 }

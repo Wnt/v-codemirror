@@ -9,7 +9,6 @@ import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.data.HasValue;
 import com.vaadin.shared.Registration;
-import com.vaadin.shared.ui.JavaScriptComponentState;
 import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.HasValueChangeMode;
@@ -52,8 +51,7 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 		getState().lineNumbers = true;
 		getState().lineWrapping = true;
 		getState().foldGutter = true;
-		
-//		setGutters("CodeMirror-linenumbers", "CodeMirror-foldgutter");
+		getState().gutters = Arrays.asList("CodeMirror-linenumbers", "CodeMirror-foldgutter");
 
 		addFunction("onValueChange", arguments -> {
 			String value = arguments.asString();
@@ -62,13 +60,6 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 
 		setValueChangeMode(ValueChangeMode.EAGER);
 	}
-
-//	private void setGutters(String... gutters) {
-//		for (String string : gutters) {
-//			
-//		}
-//		getState().foldGutter = 
-//	}
 
 	public void setMode(String mode) {
 		getState().mode = mode;
@@ -158,7 +149,37 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 
 	@Override
 	protected CodeMirrorState getState(boolean markAsDirty) {
-		// TODO Auto-generated method stub
 		return (CodeMirrorState) super.getState(markAsDirty);
 	}
+	
+	public boolean isLineNumbers() {
+		return getState(false).lineNumbers;
+	}
+	public void setLineNumbers(boolean lineNumbers) {
+		getState().lineNumbers = lineNumbers;
+	}
+	public boolean isLineWrapping() {
+		return getState(false).lineWrapping;
+	}
+	public void setLineWrapping(boolean lineWrapping) {
+		getState().lineWrapping = lineWrapping;
+	}
+	public boolean isFoldGutter() {
+		return getState(false).foldGutter;
+	}
+	public void setFoldGutter(boolean foldGutter) {
+		getState().foldGutter = foldGutter;
+	}
+
+    public void addGutter(String gutter) {
+        getState().gutters.add(gutter);
+    }
+
+    public void removeGutter(String gutter) {
+    	getState().gutters.remove(gutter);
+    }
+
+    public List<String> getGutters() {
+        return new ArrayList<>(getState().gutters);
+    }
 }
