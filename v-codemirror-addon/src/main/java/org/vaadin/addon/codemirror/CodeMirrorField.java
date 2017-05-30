@@ -51,7 +51,7 @@ public class CodeMirrorField extends AbstractJavaScriptComponent implements HasV
 		getState().lineNumbers = true;
 		getState().lineWrapping = true;
 		getState().foldGutter = true;
-		getState().gutters = Arrays.asList("CodeMirror-linenumbers", "CodeMirror-foldgutter");
+		getState().gutters = new ArrayList(Arrays.asList("CodeMirror-linenumbers", "CodeMirror-foldgutter"));
 
 		addFunction("onValueChange", arguments -> {
 			String value = arguments.asString();
